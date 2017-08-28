@@ -1,25 +1,21 @@
 package Interface;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import Estoque.controller.LivroController;
-import sistema.bin.LivroBin;
 import sistema.bin.Listagem;
-
-import javax.swing.JToggleButton;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
-import java.awt.Font;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import sistema.bin.LivroBin;
 
 public class Livro extends JFrame {
 
@@ -121,7 +117,7 @@ public class Livro extends JFrame {
 		JButton btnAlterar = new JButton("Alterar");
 		btnAlterar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				LivroController.Alterar(txtTitulo.getText(),txtEditora.getText(),Id);
+				LivroController.Alterar(txtTitulo.getText(), txtEditora.getText(), Id);
 
 			}
 		});
@@ -145,8 +141,6 @@ public class Livro extends JFrame {
 		txtTitulo.setText(LivroBin.getTitulo());
 		txtEditora.setText(LivroBin.getEditora());
 		Id = LivroBin.getId();
-		
-		
-		
+
 	}
 }

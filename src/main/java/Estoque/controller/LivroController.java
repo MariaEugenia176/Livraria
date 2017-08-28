@@ -16,7 +16,7 @@ import sistema.bin.LivroBin;
 public class LivroController {
 
 	LivroBin LivroBin = new LivroBin();
-	
+
 	public void InserirDados(String titulo, String editora) {
 		CriaConexao banco = new CriaConexao();
 
@@ -55,20 +55,19 @@ public class LivroController {
 		}
 	}
 
-	public String Alterar(String titulo, String editora,int id) {
-		//,  LivroBin LivroBin
-		
+	public String Alterar(String titulo, String editora, int id) {
+		// , LivroBin LivroBin
+
 		CriaConexao banco = new CriaConexao();
-		
-		
+
 		String retorno = "erro";
 		int res;
 		try {
 
 			Connection ExConn = (Connection) banco.abrirBDConn();
 			Statement stmt = (Statement) ExConn.createStatement();
-			res = stmt.executeUpdate("UPDATE estoque SET titulo = '" + titulo + "', editora = '" + editora
-					+ "' WHERE id = " + id);
+			res = stmt.executeUpdate(
+					"UPDATE estoque SET titulo = '" + titulo + "', editora = '" + editora + "' WHERE id = " + id);
 			if (res == 1)
 				JOptionPane.showMessageDialog(null, "Os dados foram alterados com sucesso");
 			stmt.close();
@@ -111,14 +110,10 @@ public class LivroController {
 
 			Statement statement = (Statement) Conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
 					ResultSet.CONCUR_READ_ONLY);
-			ResultSet st = statement.
-					executeQuery("SELECT * FROM estoque");
-						while (st.next()) {
-				modelo.addRow(new Object[] 
-						{ Tabela.getRowCount() + 1, 
-								st.getInt("id"), 
-								st.getString("Titulo"),
-								st.getString("Editora"),
+			ResultSet st = statement.executeQuery("SELECT * FROM estoque");
+			while (st.next()) {
+				modelo.addRow(new Object[] { Tabela.getRowCount() + 1, st.getInt("id"), st.getString("Titulo"),
+						st.getString("Editora"),
 
 				});
 			}

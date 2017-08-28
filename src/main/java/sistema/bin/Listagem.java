@@ -1,13 +1,15 @@
 package sistema.bin;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -16,9 +18,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumnModel;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+
 import Estoque.controller.LivroController;
 import Interface.Livro;
 
@@ -26,15 +26,15 @@ public class Listagem extends JFrame {
 
 	String[] coluna = { "", "Id", "Titulo", "Editora" };
 	String[][] linhas = {};
-	
+
 	private DefaultTableModel tabela = new DefaultTableModel(linhas, coluna);
 	private JScrollPane Scroll = null;
 	private JTable Tabela = null;
 
 	private Livro Livro = null;
-	private LivroBin LivroBin = null;	 
+	private LivroBin LivroBin = null;
 	private LivroController LivroController = new LivroController();
-	
+
 	private JPanel contentPane;
 
 	/**
@@ -61,7 +61,7 @@ public class Listagem extends JFrame {
 				public void mouseReleased(MouseEvent e) {
 					int i = Tabela.getSelectedRow();
 					Object x = Tabela.getValueAt(i, 1);
-					String id = x + "" ;
+					String id = x + "";
 					int cod = Integer.parseInt(id);
 					LivroController.Buscar(cod, LivroBin);
 					Livro.preenche_campo();
@@ -101,24 +101,24 @@ public class Listagem extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		contentPane.add(getScroll(),null);
-		
+		contentPane.add(getScroll(), null);
+
 		JButton btnAtualizarTabela = new JButton("AtualizarTabela");
 		btnAtualizarTabela.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			try {
-				LivroController.preenche_tabela(Tabela);
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+				try {
+					LivroController.preenche_tabela(Tabela);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnAtualizarTabela.setBounds(474, 37, 147, 23);
 		contentPane.add(btnAtualizarTabela);
 	}
-	
-	public void ReceberDados(Livro Livro, LivroBin LivroBin){
+
+	public void ReceberDados(Livro Livro, LivroBin LivroBin) {
 		this.Livro = Livro;
 		this.LivroBin = LivroBin;
 	}

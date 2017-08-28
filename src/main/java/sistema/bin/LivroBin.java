@@ -2,10 +2,9 @@ package sistema.bin;
 
 public class LivroBin {
 
-	
 	private String titulo;
 	private String editora;
-	
+
 	private int id;
 
 	public String getTitulo() {
