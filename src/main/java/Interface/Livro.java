@@ -98,8 +98,10 @@ public class Livro extends JFrame {
 		JButton btnExcluir = new JButton("Excluir");
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int id = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o id do livro para excluir: "));
-				LivroController.Excluir(id);
+				Listagem.ReceberDados(frame, LivroBin);
+				Listagem.setVisible(true);
+				LivroController.Excluir(txtTitulo.getText(), txtEditora.getText(), Id);
+				
 			}
 		});
 		btnExcluir.setBounds(283, 132, 80, 23);
@@ -117,7 +119,10 @@ public class Livro extends JFrame {
 		JButton btnAlterar = new JButton("Alterar");
 		btnAlterar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Listagem.ReceberDados(frame, LivroBin);
+				Listagem.setVisible(true);
 				LivroController.Alterar(txtTitulo.getText(), txtEditora.getText(), Id);
+				
 
 			}
 		});
