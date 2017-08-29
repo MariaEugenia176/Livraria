@@ -91,11 +91,17 @@ public class Livro extends JFrame {
 
 				if (txtTitulo.getText() == null || txtTitulo.getText().trim().equals("") || txtEditora.getText() == null || txtEditora.getText().trim().equals("")) {
 					JOptionPane.showMessageDialog(null, "Não é possível fazer a inclusão com campos em branco");
-				} else {
+					
+				}else if (LivroController.buscarLivroExistente(txtTitulo.getText())){
+					JOptionPane.showMessageDialog(null, "Não é possível incluir livros repetidos");
+				} 
+				else {
 					LivroController.InserirDados(titulo, editora);
 				}
 			}
 		});
+		
+		
 		btnIncluir.setBounds(103, 132, 80, 23);
 		contentPane.add(btnIncluir);
 

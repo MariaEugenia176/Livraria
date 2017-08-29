@@ -16,7 +16,7 @@ import sistema.bin.LivroBin;
 public class LivroController {
 
 	LivroBin LivroBin = new LivroBin();
-	
+
 	public void InserirDados(String titulo, String editora) {
 		CriaConexao banco = new CriaConexao();
 
@@ -38,7 +38,7 @@ public class LivroController {
 		}
 	}
 
-	public void Excluir(String titulo, String editora,int id) {
+	public void Excluir(String titulo, String editora, int id) {
 		CriaConexao banco = new CriaConexao();
 		try {
 
@@ -55,9 +55,8 @@ public class LivroController {
 		}
 	}
 
-	public String Alterar(String titulo, String editora,int id) {
-		
-		
+	public String Alterar(String titulo, String editora, int id) {
+
 		CriaConexao banco = new CriaConexao();
 		String retorno = "erro";
 		int res;
@@ -65,8 +64,8 @@ public class LivroController {
 
 			Connection ExConn = (Connection) banco.abrirBDConn();
 			Statement stmt = (Statement) ExConn.createStatement();
-			res = stmt.executeUpdate("UPDATE estoque SET titulo = '" + titulo + "', editora = '" + editora
-					+ "' WHERE id = " + id);
+			res = stmt.executeUpdate(
+					"UPDATE estoque SET titulo = '" + titulo + "', editora = '" + editora + "' WHERE id = " + id);
 			if (res == 1)
 				JOptionPane.showMessageDialog(null, "Os dados foram alterados com sucesso");
 			stmt.close();
@@ -100,6 +99,32 @@ public class LivroController {
 
 	}
 
+	// busca livro para não fazer inclusão de livros repetidos
+	public Boolean buscarLivroExistente(String titulo) {
+		boolean existe = false;
+		CriaConexao banco = new CriaConexao();
+		try {
+
+			Connection ExConn = (Connection) banco.abrirBDConn();
+			Statement stmt = (Statement) ExConn.createStatement();
+			String sSQL = "SELECT * FROM estoque WHERE titulo = '" + titulo + "'";
+			ResultSet rs = stmt.executeQuery(sSQL);
+
+			if (rs.next()) {
+				existe = true;
+			} else {
+				existe = false;
+			}
+			stmt.close();
+			banco.fecharBDConn();
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Os dados nã pudram ser encontrados");
+		}
+
+		return existe;
+
+	}
+
 	public void preenche_tabela(JTable Tabela) throws SQLException {
 		CriaConexao banco = new CriaConexao();
 		Connection Conn = (Connection) banco.abrirBDConn();
@@ -109,14 +134,10 @@ public class LivroController {
 
 			Statement statement = (Statement) Conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
 					ResultSet.CONCUR_READ_ONLY);
-			ResultSet st = statement.
-					executeQuery("SELECT * FROM estoque");
-						while (st.next()) {
-				modelo.addRow(new Object[] 
-						{ Tabela.getRowCount() + 1, 
-								st.getInt("id"), 
-								st.getString("Titulo"),
-								st.getString("Editora"),
+			ResultSet st = statement.executeQuery("SELECT * FROM estoque");
+			while (st.next()) {
+				modelo.addRow(new Object[] { Tabela.getRowCount() + 1, st.getInt("id"), st.getString("Titulo"),
+						st.getString("Editora"),
 
 				});
 			}
