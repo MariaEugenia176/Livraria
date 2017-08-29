@@ -90,7 +90,7 @@ public class Listagem extends JFrame {
 
 		modeloDaColuna.getColumn(0).setPreferredWidth(30); // Numero da linha
 		modeloDaColuna.getColumn(1).setPreferredWidth(50); // Id
-		modeloDaColuna.getColumn(2).setPreferredWidth(150);// Titulo
+		modeloDaColuna.getColumn(2).setPreferredWidth(200);// Titulo
 		modeloDaColuna.getColumn(3).setPreferredWidth(150);// Editora
 	}
 
