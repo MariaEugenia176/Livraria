@@ -89,7 +89,11 @@ public class Livro extends JFrame {
 				String titulo = txtTitulo.getText();
 				String editora = txtEditora.getText();
 
-				LivroController.InserirDados(titulo, editora);
+				if (txtTitulo.getText() == null || txtTitulo.getText().trim().equals("") || txtEditora.getText() == null || txtEditora.getText().trim().equals("")) {
+					JOptionPane.showMessageDialog(null, "Não é possível fazer a inclusão com campos em branco");
+				} else {
+					LivroController.InserirDados(titulo, editora);
+				}
 			}
 		});
 		btnIncluir.setBounds(103, 132, 80, 23);
@@ -101,7 +105,7 @@ public class Livro extends JFrame {
 				Listagem.ReceberDados(frame, LivroBin);
 				Listagem.setVisible(true);
 				LivroController.Excluir(txtTitulo.getText(), txtEditora.getText(), Id);
-				
+
 			}
 		});
 		btnExcluir.setBounds(283, 132, 80, 23);
@@ -122,7 +126,6 @@ public class Livro extends JFrame {
 				Listagem.ReceberDados(frame, LivroBin);
 				Listagem.setVisible(true);
 				LivroController.Alterar(txtTitulo.getText(), txtEditora.getText(), Id);
-				
 
 			}
 		});
