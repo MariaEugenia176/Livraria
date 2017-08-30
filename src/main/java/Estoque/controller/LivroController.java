@@ -143,6 +143,8 @@ public class LivroController {
 			}
 		} catch (Exception erro) {
 			JOptionPane.showMessageDialog(null, "Erro ao adicionar na tabela");
+		}finally {
+			banco.fecharBDConn();	
 		}
 	}
 }
